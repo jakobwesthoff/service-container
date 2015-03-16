@@ -1,14 +1,15 @@
 {
   "name": "service-container",
+  "private": true,
   "description":"A Symfony2 inspired depdendency injection container for node",
   "version": "0.0.11",
-  "author": {
-    "name":"Brandon Eum"
-  },
-  "contributors":[],
+  "author":"Brandon Eum",
+  "contributors":[
+    "Jakob Westhoff <jakob@westhoffswelt.de> (http://westhoffswelt.de)"
+  ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/linkshare/service-container.git"
+    "url": "git://github.com/jakobwesthoff/service-container.git"
   },
   "main": "ServiceContainer.js",
   "directories": {
@@ -18,7 +19,7 @@
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/linkshare/service-container/blob/master/LICENSE"
+      "url": "https://github.com/jakobwesthoff/service-container/blob/master/LICENSE"
     }
   ],
   "engines" : { "node" : ">=0.8.17" },
