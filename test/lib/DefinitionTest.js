@@ -35,6 +35,11 @@ describe('lib/Definition.js', function () {
                 new Definition();
             }).to.not.throw();
         });
+
+        it("Should have a default for factoryFunction value", function() {
+            var definition = new Definition();
+            expect(definition.factoryFunction).to.equal(false);
+        });
     });
 
     /**

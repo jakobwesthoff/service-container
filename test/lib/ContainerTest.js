@@ -373,6 +373,68 @@ describe('lib/Container.js', function () {
                 result = container.constructService('some_service', false, {});
                 expect(mockClass.constructIt.called).to.be.true;
             });
+
+            it('Should use the factoryFunction for construction if one is specified', function () {
+                var container, definition, result;
+                var dependency = null;
+                var mockFunction = function(dep) {
+                    dependency = dep;
+                    return "Foobar";
+                };
+
+                definition = new Definition();
+                definition.class = mockFunction;
+                definition.factoryFunction = true;
+                definition.arguments = ["Baz"];
+
+                container = new Container();
+                container.set('some_service', definition);
+
+                result = container.constructService('some_service', false, {});
+                expect(dependency).to.equal("Baz");
+                expect(result).to.equal("Foobar");
+            });
+
+            it('Should reuse given instance of factoryFunction if isSingleton is set', function () {
+                var container, definition, result;
+                var mockFunction = sinon.spy(function() {
+                    return "Foobar";
+                });
+
+                definition = new Definition();
+                definition.class = mockFunction;
+                definition.factoryFunction = true;
+                definition.isSingleton = true;
+
+                container = new Container();
+                container.set('some_service', definition);
+
+                container.constructService('some_service', false, {});
+                container.constructService('some_service', false, {});
+                result = container.constructService('some_service', false, {});
+                expect(mockFunction.calledOnce).to.be.true;
+            });
+
+            it('Should call factoryFunction every time if isSingleton is not set', function () {
+                var container, definition, result;
+                var mockFunction = sinon.spy(function() {
+                    return "Foobar";
+                });
+
+                definition = new Definition();
+                definition.class = mockFunction;
+                definition.factoryFunction = true;
+
+                container = new Container();
+                container.set('some_service', definition);
+
+                container.constructService('some_service', false, {});
+                container.constructService('some_service', false, {});
+                result = container.constructService('some_service', false, {});
+                expect(mockFunction.calledThrice).to.be.true;
+            });
+
+
         });
 
         it('Should throw an error if the ID exists in the service tree param, indicating a circular reference', function () {
