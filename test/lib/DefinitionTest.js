@@ -36,9 +36,9 @@ describe('lib/Definition.js', function () {
             }).to.not.throw();
         });
 
-        it("Should have a default for factoryFunction value", function() {
+        it("Should have a default for isFactoryFunction value", function() {
             var definition = new Definition();
-            expect(definition.factoryFunction).to.equal(false);
+            expect(definition.isFactoryFunction).to.equal(false);
         });
     });
 

@@ -63,8 +63,20 @@ describe('lib/Builder.js', function () {
         it('Should construct and return a new container', function () {
             var builder, result;
             builder = new Builder(Container, null);
-            result = builder.buildContainer({});
+            result = builder.buildContainer([{}]);
             expect(result).to.be.an.instanceof(Container);
+        });
+
+        it('Should loop through single service definition not provided as array', function () {
+            var builder, result, spy;
+            spy = sinon.spy();
+
+            builder = new Builder(Container, null);
+            builder.parseConfiguration = spy;
+            result = builder.buildContainer({});
+
+            expect(result).to.be.an.instanceof(Container);
+            expect(spy.calledOnce).to.be.true;
         });
 
         it('Should loop through the service definitions and parse them with #parseConfiguration', function () {
@@ -78,6 +90,8 @@ describe('lib/Builder.js', function () {
             expect(result).to.be.an.instanceof(Container);
             expect(spy.calledThrice).to.be.true;
         });
+
+
     });
 
     describe('#parseConfiguration', function () {

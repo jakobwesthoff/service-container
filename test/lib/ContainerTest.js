@@ -384,7 +384,7 @@ describe('lib/Container.js', function () {
 
                 definition = new Definition();
                 definition.class = mockFunction;
-                definition.factoryFunction = true;
+                definition.isFactoryFunction = true;
                 definition.arguments = ["Baz"];
 
                 container = new Container();
@@ -403,7 +403,7 @@ describe('lib/Container.js', function () {
 
                 definition = new Definition();
                 definition.class = mockFunction;
-                definition.factoryFunction = true;
+                definition.isFactoryFunction = true;
                 definition.isSingleton = true;
 
                 container = new Container();
@@ -423,7 +423,7 @@ describe('lib/Container.js', function () {
 
                 definition = new Definition();
                 definition.class = mockFunction;
-                definition.factoryFunction = true;
+                definition.isFactoryFunction = true;
 
                 container = new Container();
                 container.set('some_service', definition);
